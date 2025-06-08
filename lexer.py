@@ -38,5 +38,5 @@ def tokenize(code):
         
         yield (token_type, token_value)
 # Ejemplo de uso
-code = """figura piramide pos(50,70) tam 40 texto "DREAM" pos(30,50) color #FFFFFF"""
-for token in tokenize(code): print(token)
+#code = """figura piramide pos(50,70) tam 40 texto "DREAM" pos(30,50) color #FFFFFF"""
+#for token in tokenize(code): print(token)
