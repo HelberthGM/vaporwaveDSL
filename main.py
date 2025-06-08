@@ -3,40 +3,40 @@ from parser import VaporParser
 import sys
 
 def main():
+    # Crear un programa VaporLang de ejemplo si no se proporciona archivo
     if len(sys.argv) < 2:
-        print("Uso: python main.py <archivo.vapor> [salida.png]")
-        return
+        print("Usando programa de ejemplo...")
+        code = """
+        fondo degradado #290033 -> #00A2FF
+        figura piramide pos(400,300) tam 100 color #FF00FF alpha 0.7
+        texto "DREAMNATION" pos(300,100) color #FFFFFF
+        efecto scanlines grosor 2
+        """
+    else:
+        try:
+            with open(sys.argv[1], 'r') as f:
+                code = f.read()
+        except FileNotFoundError:
+            print(f"Error: Archivo no encontrado - {sys.argv[1]}")
+            return
     
-    input_file = sys.argv[1]
-    output_file = sys.argv[2] if len(sys.argv) > 2 else "salida.png"
+    # Fase léxica
+    tokens = list(tokenize(code))
+    print("\nTokens generados:")
+    for i, (token_type, token_value) in enumerate(tokens):
+        print(f"{i+1}: ({token_type}, {repr(token_value)})")
     
-    try:
-        # Leer código fuente
-        with open(input_file, 'r', encoding='utf-8') as f:
-            code = f.read()
-        
-        # Fase léxica
-        tokens = tokenize(code)
-        print("Tokens generados:")
-        for token in tokens:
-            print(token)
-        
-        # Reiniciamos el generador para el parser
-        tokens = tokenize(code)
-        
-        # Fase sintáctica
-        parser = VaporParser(tokens)
-        image = parser.parse()
-        
-        if image:
-            image.save(output_file)
-            print(f"Imagen generada: {output_file}")
-            image.show()
+    # Fase sintáctica
+    parser = VaporParser(tokens)
+    image = parser.parse()
     
-    except FileNotFoundError:
-        print(f"Error: Archivo no encontrado - {input_file}")
-    except Exception as e:
-        print(f"Error inesperado: {e}")
+    if image:
+        output_file = "vaporwave_output.png"
+        image.save(output_file)
+        print(f"\n¡Imagen generada con éxito! Guardada como: {output_file}")
+        image.show()
+    else:
+        print("\nNo se pudo generar la imagen debido a errores")
 
 if __name__ == "__main__":
     main()

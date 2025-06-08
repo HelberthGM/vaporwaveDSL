@@ -4,15 +4,17 @@ TOKENS = [
     ('FONDO', r'fondo'),
     ('FIGURA_TYPE', r'(piramide|sol|grid)'),
     ('TEXTO', r'texto'),
-    ('EFECTO_TYPE', r'(scanlines|glitch)'),
-    ('COLOR', r'#[0-9a-fA-F]{6}'),
+    ('EFECTO_TYPE', r'(scanlines|glitch)'),  
+    ('COLOR_VALUE', r'#[0-9a-fA-F]{6}'),  # Cambiado a COLOR_VALUE
+    ('COLOR_KEYWORD', r'color'),  # Nuevo token para la palabra "color"
+    ('GROSOR', r'grosor'), 
     ('POS', r'pos\(\d+,\d+\)'),
     ('TAM', r'tam\s+\d+'),
-    ('CADENA', r'"[^"]*"'),
+    ('CADENA', r'"[^"]*"'), 
     ('DEGRADADO', r'degradado'),
-    ('ALPHA', r'alpha\s+\d\.\d'),
-    ('OPERADOR', r'->'),
-    ('NUMERO', r'\d+'),
+    ('ALPHA', r'alpha\s*\d\.\d+'),  # Valor de opacidad entre 0.0 y 1.0,
+    ('OPERADOR', r'->'), # Operador de degradado
+    ('NUMERO', r'\d+'), 
     ('IGNORAR', r'\s+'),
 ]
 
