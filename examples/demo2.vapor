@@ -1,0 +1,7 @@
+fondo degradado #290033 -> #00A2FF
+figura piramide pos(400,300) tam 150 color #FF00FF alpha 0.6
+figura sol pos(150,100) tam 80 color #FF9900
+texto_japones "VAPORWAVE" pos(300,100) color #FFFFFF
+texto "Example " pos(300,150) color #00FFFF
+efecto scanlines grosor 2
+efecto_vapor glitch grosor 4

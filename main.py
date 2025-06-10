@@ -8,8 +8,8 @@ def main():
         print("Usando programa de ejemplo...")
         code = """
         fondo degradado #290033 -> #00A2FF
-        figura piramide pos(400,300) tam 100 color #FF00FF alpha 0.7
-        texto "DREAMNATION" pos(300,100) color #FFFFFF
+        figura sol pos(400,300) tam 100 color #e89d33 
+        texto "VAPORWAVE" pos(300,100) color #FFFFFF
         efecto scanlines grosor 2
         """
     else:

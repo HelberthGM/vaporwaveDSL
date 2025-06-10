@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 import math
+import os
 
 class VaporParser:
     def __init__(self, tokens):
@@ -138,30 +139,41 @@ class VaporParser:
         # Rayos
         for i in range(8):
             angle = math.radians(i * 45)
-            end_x = x + (size * 1.5) * math.cos(angle)
-            end_y = y + (size * 1.5) * math.sin(angle)
+            end_x = x + size * math.cos(angle)
+            end_y = y + size * math.sin(angle)
             self.draw.line((x, y, end_x, end_y), fill=fill, width=3)
     
     def parse_text(self):
         self.consume('TEXTO')
         content = self.consume('CADENA')
         position = self.consume('POS')
-        
-        # Manejar color opcional
+
+        # Parámetros opcionales con valores por defecto
         color = self.current_color
-        if self.current_token() and self.current_token()[0] == 'COLOR_KEYWORD':
-            self.consume('COLOR_KEYWORD')  # Consume la palabra "color"
-            color = self.consume('COLOR_VALUE')  # Consume el valor del color
-            self.current_color = color
-        
+        size = 40  # Tamaño de fuente por defecto
+
+        while self.current_token() and self.current_token()[0] in ['COLOR_KEYWORD', 'TAM']:
+            token_type, token_value = self.current_token()
+
+            if token_type == 'COLOR_KEYWORD':
+                self.consume('COLOR_KEYWORD')
+                color = self.consume('COLOR_VALUE')
+                self.current_color = color
+
+            elif token_type == 'TAM':
+                self.consume('TAM')
+                size = token_value
+
+        # Obtener la fuente con el tamaño especificado
+        font = self.get_vapor_font(size)
+
         # Dibujar texto
         r, g, b = int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-        font = ImageFont.load_default()
-        
+
         # Texto principal
         self.draw.text(position, content, fill=(r, g, b), font=font)
-        
-        # Sombra para efecto neon
+
+        # Sombra para efecto neon (vaporwave)
         self.draw.text((position[0]+2, position[1]+2), content, fill=(0, 0, 0, 128), font=font)
     
     def parse_effect(self):
@@ -177,6 +189,15 @@ class VaporParser:
             self.apply_scanlines(intensity)
         elif effect_type == "glitch":
             self.apply_glitch(intensity)
+        elif effect_type == "grid":
+            # Asegura que intensity sea un entero positivo
+            try:
+                intensity = int(intensity)
+            except Exception:
+                intensity = 2
+            if intensity < 1:
+                intensity = 1
+            self.apply_grid(intensity * 10)
     
     def apply_scanlines(self, intensity):
         """Aplica efecto de scanlines"""
@@ -197,6 +218,15 @@ class VaporParser:
             offset_x = random.randint(-intensity*3, intensity*3)
             self.img.paste(region, (x + offset_x, y))
     
+    def apply_grid(self, size=50):
+        """Aplica un efecto de grid simple"""
+        size = max(1, int(size))  # Asegura que size nunca sea menor que 1
+        width, height = self.img.size
+        for x in range(0, width, size):
+            self.draw.line((x, 0, x, height), fill=(255, 255, 255, 50))
+        for y in range(0, height, size):
+            self.draw.line((0, y, width, y), fill=(255, 255, 255, 50))
+
     def get_color_value(self):
         # Obtiene un valor de color, manejando diferentes formatos
         if self.current_token()[0] == 'COLOR_KEYWORD':
@@ -206,3 +236,22 @@ class VaporParser:
             return self.consume('COLOR_VALUE')
         else:
             raise SyntaxError(f"Se esperaba un valor de color, se encontró {self.current_token()[0]}")
+        
+    def get_vapor_font(self, size=40):
+        """Obtiene una fuente con estilo vaporwave"""
+        # Lista de fuentes a probar (en orden de preferencia)
+        font_paths = [
+            "fonts/GreelMythology.ttf"
+            "fonts/ExtraBlur.ttf",
+            "fonts/bad_signal.otf",
+        ]
+
+        for font_path in font_paths:
+            if os.path.exists(font_path):
+                try:
+                    return ImageFont.truetype(font_path, size)
+                except:
+                    continue
+                
+        # Si no se encuentra ninguna fuente, usar la predeterminada
+        return ImageFont.load_default()

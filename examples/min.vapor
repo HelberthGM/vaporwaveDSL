@@ -1,0 +1,4 @@
+fondo degradado #FE00FE -> #008080 
+figura piramide pos(400,300) color #7F00EF
+texto "Prueba de texto" pos(300,100) tam 80 color #FFFFFF
+texto "123" pos(300,500) tam 60 color #f5cb0f
