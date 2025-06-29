@@ -2,23 +2,32 @@
 
 ## Gramatica
 ```
-program     = { command } ;
-command     = background | figure | text | effect ;
-background  = "fondo" "degradado" color "->" color ;
-figure      = "figura" figure_type position [ size ] [ color ] [ alpha ] ;
-figure_type = "piramide" | "sol" | "grid" ;
-text        = "texto" string position [ color ] ;
-effect      = "efecto" effect_type [ intensity ] ;
-effect_type = "scanlines" | "glitch" ;
-position    = "pos" "(" number "," number ")" ;
-size        = "tam" number ;
-color       = "color" hex_color ;
-alpha       = "alpha" float ;
-intensity   = "grosor" number ;
-hex_color   = "#" hex_digit {6} ;
-number      = digit { digit } ;
-float       = number "." number ;
-string      = '"' { character } '"' ;
+S = { command } | λ;
+command = background | figure | text | effect | elemento | command ;
+
+background      = "fondo" "degradado" color_value "->" color_value ;
+
+figure          = "figura" figure_type position | "figura" figure_type position [ size_param ] | "figura" figure_type position [ color_param ] | "figura" figure_type position [ alpha_param ] ;
+figure_type     = "piramide" | "sol" | "grid" ;
+
+text            = "texto" string position | "texto" string position [ color_param ] |"texto" string position [ size_param ] ;
+
+effect          = "efecto" effect_type [ intensity_param ] ;
+effect_type     = "scanlines" | "glitch" | "vhs" | "neon" ;
+
+elemento        = "elemento" elemento_type position [ size_param ] ;
+elemento_type   = "busto" | "palmera" | "columnas" | "win95" ;
+
+position        = "pos" "(" number "," number ")" ;
+size_param      = "tam" number ;
+color_param     = "color" color_value ;
+alpha_param     = "alpha" float ;
+intensity_param = "intensidad" number | "grosor" number ;
+
+color_value     = "#" hex_digit {6} ;
+number          = digit { digit } ;
+float           = number "." number ;
+string          = '"' { character } '"' ;
 ```
 ## Ejemplos de uso
 

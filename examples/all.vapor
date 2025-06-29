@@ -1,0 +1,14 @@
+fondo degradado #290033 -> #00A2FF
+
+elemento busto pos(200,300) tam 250
+elemento palmera pos(600,400) 
+elemento win95 pos(100,500) tam 80
+
+figura piramide pos(400,300) tam 150 color #FF00FF alpha 0.5
+figura sol pos(650,150)
+
+texto "DREAMNATION" pos(200,100) tam 80 color #FFFFFF
+texto "東京" pos(300,500) color #00FFFF
+
+efecto scanlines intensidad 3
+efecto vhs intensidad 2
