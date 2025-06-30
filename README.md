@@ -1,9 +1,132 @@
-# vaporwaveDSL
+# VaporLang User Manual
+VaporLang is a DSL (Domain-Specific Language) for creating images with vaporwave aesthetics. This document explains how to use the language and its features.
 
-## Gramatica
+## Installation 🔧
+### Clone the repository:
+
+```
+git clone https://github.com/your-username/vaporlang.git
+cd vaporlang
+```
+
+### Install dependencies:
+```
+pip install Pillow
+```
+## Basic Syntax 📝
+### General structure
+```
+[COMMAND] [PARAMETERS] [MODIFIERS]
+```
+### Comments
+```
+// This is a comment
+```
+### Available Commands 🖼️
+1. Gradient Background
+```
+fondo degradado #290033 -> #00A2FF
+```
+2. Geometric Shapes
+Available shapes: sol (sun), piramide (pyramid), grid
+```
+figura sol pos(400,300) tam 100 color #e89d33 alpha 0.8
+figura piramide pos(200,200) tam 80 color #FF00FF
+figura grid pos(500,400) tam 50
+```
+
+3. Styled Text
+```
+texto "VAPORWAVE" pos(300,100) tam 60 color #FFFFFF
+```
+4. Visual Effects
+Available effects: scanlines, glitch, vhs, neon
+```
+efecto scanlines grosor 2
+efecto glitch intensidad 3
+efecto vhs intensidad 4
+efecto neon intensidad 2
+```
+
+5. Decorative Elements
+Available elements: busto (bust), palmera (palm tree), columnas (columns), win95
+```
+elemento busto pos(200,400) tam 80
+elemento palmera pos(600,500) tam 120
+elemento columnas pos(400,450)
+elemento win95 pos(100,350) tam 90
+```
+
+### Parameters ⚙️
+| Parameter | Description | Example |
+|:---:|:---:|:---:|
+| ```pos(x,y)```	|Position on the image	| ```pos(300,200)``` |
+| ```tam <value>``` | Size (integer)	| ```tam 100 ```|
+| ```color #RRGGBB``` | Color in hexadecimal	| ```color #FF00FF``` |
+| ```alpha <value>```	| Transparency (0.0 to 1.0)	| ```alpha 0.7``` |
+| ```grosor <value> ```| Thickness for effects (integer)	| ```grosor 3``` |
+| ```intensidad <value> ```| Intensity for effects (integer) | ```intensidad 4 ```|
+
+### Complete Example ✨
+VaporLang sample program
+```
+fondo degradado #290033 -> #00A2FF
+figura sol pos(400,300) tam 100 color #e89d33 alpha 0.9
+texto "VAPORWAVE" pos(300,100) tam 60 color #FFFFFF
+efecto scanlines grosor 2
+efecto neon intensidad 3
+elemento busto pos(200,400) tam 80
+elemento palmera pos(600,500) tam 120
+```
+## Execution ▶️
+### Run with input file:
+```
+python main.py my_program.vapor
+``` 
+### Specify output file:
+```
+python main.py my_program.vapor output.png
+```
+### Use sample program:
+```
+python main.py
+```
+##  Pro Tips 💡
+### Custom Fonts:
+
+1. Place .ttf fonts in the fonts/ directory
+
+The program will automatically look for fonts like:
+
+- VCR_OSD_MONO.ttf
+- GreelMythology.ttf
+- ExtraBlur.ttf
+
+2. Vaporwave Color Palette:
+
+```
+#FF00FF  // Bright magenta
+#00FFFF  // Cyan
+#FF9900  // Electric orange
+#290033  // Dark purple
+#00A2FF  // Bright blue
+```
+3. Transparency Effects:
+
+- Use alpha to create overlay effects
+
+Example: ```alpha 0.5``` for 50% transparency
+
+4. Effect Combinations:
+
+- You can apply multiple effects in sequence
+
+Example: ```efecto scanlines``` followed by ```efecto neon```
+
+## Gramatica Generativa
 ```
 S = { command } | λ;
-command = background | figure | text | effect | elemento | command ;
+command = {background} | {figure} | {text} | {effect} | {elemento} | {command} ;
 
 background      = "fondo" "degradado" {color_value} "->" {color_value} ;
 
@@ -28,42 +151,4 @@ color_value     = "#" hex_digit {6} ;
 number          = digit { digit } ;
 float           = number "." number ;
 string          = '"' { character } '"' ;
-```
-## Ejemplos de uso
-
-## Fondos degradados:
-```
-Púrpura (#6A0DAD) → Rosa (#FF00FF)
-
-Azul oscuro (#003366) → Cian (#00FFFF)
-```
-
-## Figuras básicas:
-
-### Pirámide simplificada (triángulo)
-```
-draw.polygon([(x, y-tam), (x-tam, y+tam), (x+tam, y+tam)])
-```
-
-### Sol (círculo + líneas radiales)
-```
-draw.ellipse((x-tam, y-tam, x+tam, y+tam))
-for i in range(8):
-    angle = i * 45
-    draw.line((x, y, x+tam*1.5*cos(angle), y+tam*1.5*sin(angle)))
-```
-
-## Efectos rápidos:
-
-### Scanlines (líneas horizontales)
-```
-for y in range(0, height, 4):
-    draw.line((0, y, width, y), fill=(0,0,0,50))
-```
-
-### Glitch (desplazamiento aleatorio)
-```
-offset_x = random.randint(-5, 5)
-cropped = img.crop((50, 0, width-50, height))
-img.paste(cropped, (50+offset_x, 0))
 ```
