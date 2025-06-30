@@ -239,19 +239,20 @@ class VaporParser:
         
     def get_vapor_font(self, size=40):
         """Obtiene una fuente con estilo vaporwave"""
-        # Lista de fuentes a probar (en orden de preferencia)
         font_paths = [
-            "fonts/GreelMythology.ttf"
+            "fonts/VCR_OSD_MONO.ttf",  # Fuente principal
+            "fonts/GreelMythology.ttf",
             "fonts/ExtraBlur.ttf",
             "fonts/bad_signal.otf",
+            "arial.ttf"
         ]
-
+    
         for font_path in font_paths:
             if os.path.exists(font_path):
                 try:
                     return ImageFont.truetype(font_path, size)
                 except:
                     continue
-                
+                    
         # Si no se encuentra ninguna fuente, usar la predeterminada
         return ImageFont.load_default()

@@ -1,5 +1,17 @@
+# Arte Vaporwave Completo
 fondo degradado #290033 -> #00A2FF
-figura piramide pos(400,300) tam 100 color #FF00FF alpha 0.7
-texto "EJEMPLO" pos(300,100) color #FFFFFF
-efecto scanlines grosor 4
-efecto_vapor glitch
+
+# Figuras
+figura piramide pos(400,300) tam 150 color #FF00FF alpha 0.5
+figura sol pos(650,150) tam 80 color #FF9900
+figura grid pos(400,200) tam 100 color #00FFFF alpha 0.3
+
+# Textos
+texto "Vaporwave" pos(200,100) tam 20 color #FFFFFF
+texto "東京" pos(300,500) tam 60 color #00FFFF
+texto "VIRTUAL REALITY" pos(500,550) tam 40 color #FF66CC
+
+# Efectos
+efecto scanlines intensidad 2
+efecto vhs intensidad 3
+efecto neon intensidad 4
