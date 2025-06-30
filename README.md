@@ -22,7 +22,7 @@ pip install Pillow
 ```
 // This is a comment
 ```
-### Available Commands 🖼️
+## Available Commands 🖼️
 1. Gradient Background
 ```
 fondo degradado #290033 -> #00A2FF
@@ -57,7 +57,7 @@ elemento columnas pos(400,450)
 elemento win95 pos(100,350) tam 90
 ```
 
-### Parameters ⚙️
+## Parameters ⚙️
 | Parameter | Description | Example |
 |:---:|:---:|:---:|
 | ```pos(x,y)```	|Position on the image	| ```pos(300,200)``` |
@@ -67,7 +67,7 @@ elemento win95 pos(100,350) tam 90
 | ```grosor <value> ```| Thickness for effects (integer)	| ```grosor 3``` |
 | ```intensidad <value> ```| Intensity for effects (integer) | ```intensidad 4 ```|
 
-### Complete Example ✨
+## Complete Example ✨
 VaporLang sample program
 ```
 fondo degradado #290033 -> #00A2FF
@@ -94,13 +94,13 @@ python main.py
 ##  Pro Tips 💡
 ### Custom Fonts:
 
-1. Place .ttf fonts in the fonts/ directory
+1. Place ```.ttf``` fonts in the ```fonts/``` directory
 
 The program will automatically look for fonts like:
 
-- VCR_OSD_MONO.ttf
-- GreelMythology.ttf
-- ExtraBlur.ttf
+- ```VCR_OSD_MONO.ttf```
+- ```GreelMythology.ttf```
+- ```ExtraBlur.ttf```
 
 2. Vaporwave Color Palette:
 
@@ -123,7 +123,7 @@ Example: ```alpha 0.5``` for 50% transparency
 
 Example: ```efecto scanlines``` followed by ```efecto neon```
 
-## Gramatica Generativa
+## Gramatica Generativa 📜​
 ```
 S = { command } | λ;
 command = {background} | {figure} | {text} | {effect} | {elemento} | {command} ;
