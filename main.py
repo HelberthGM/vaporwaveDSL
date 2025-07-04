@@ -35,9 +35,11 @@ def main():
     # Fase léxica
     try:
         tokens = list(tokenize(code))
-        #print("\nTokens generados:")
+        """" 
+        print("\nTokens generados:")
         for i, (token_type, token_value) in enumerate(tokens):
-            aux = (f"{i+1}: ({token_type}, {repr(token_value)})")
+            print = (f"{i+1}: ({token_type}, {repr(token_value)})")
+        """
     except Exception as e:
         print(f"Error en análisis léxico: {e}")
         return
