@@ -83,7 +83,7 @@ elemento palmera pos(600,500) tam 120
 ```
 python main.py my_program.vapor
 ``` 
-### Specify output file:
+### Or to specify output file name:
 ```
 python main.py my_program.vapor output.png
 ```
@@ -123,32 +123,35 @@ Example: ```alpha 0.5``` for 50% transparency
 
 Example: ```efecto scanlines``` followed by ```efecto neon```
 
-## Gramatica Generativa 📜​
+## Generative Grammar 📜​
 ```
-S = { command } | λ;
-command = {background} | {figure} | {text} | {effect} | {elemento} | {command} ;
+S = <command>  ;
+<command> = <background> | <figure> | <text> | <effect> | <elemento> | <command>;
 
-background      = "fondo" "degradado" {color_value} "->" {color_value} ;
+<background>      = "fondo" "degradado" {color_value} "->" {color_value} ;
 
-figure          = "figura" {figure_type} {position} | "figura" {figure_type} {position} {size_param} | "figura" {figure_type} {position} {color_param} | "figura" {figure_type} {position} {alpha_param} ;
-figure_type     = "piramide" | "sol" | "grid" ;
+<figure>          = "figura" <figure_type> <position> | "figura" <figure_type> <position> <size_param> | "figura" <figure_type> <position> <color_param> | "figura" <figure_type> {position} {alpha_param} ;
+<figure_type>     = "piramide" | "sol" | "grid" ;
 
-text            = "texto" {string} {position} | "texto" {string} {position} {color_param} |"texto" {string} {position} {size_param} ;
+<text>            = "texto" <string> <position> | "texto" <string> <position> <color_param> |"texto" <string> <position> <size_param> ;
 
-effect          = "efecto" {effect_type} {intensity_param} ;
-effect_type     = "scanlines" | "glitch" | "vhs" | "neon" ;
+<effect>          = "efecto" <effect_type> <intensity_param> ;
+<effect_type>     = "scanlines" | "glitch" | "vhs" | "neon" ;
 
-elemento        = "elemento" {elemento_type} {position} {size_param} ;
-elemento_type   = "busto" | "palmera" | "columnas" | "win95" ;
+<elemento>        = "elemento" <elemento_type> <position> <size_param> ;
+<elemento_type>   = "busto" | "palmera" | "columnas" | "win95" ;
 
-position        = "pos" "(" {number} "," {number} ")" ;
-size_param      = "tam" {number} ;
-color_param     = "color" {color_value} ;
-alpha_param     = "alpha" {float} ;
-intensity_param = "intensidad" {number} | "grosor" {number} ;
+<position>        = "pos" "(" <number> "," <number> ")" ;
+<size_param>      = "tam" <number> ;
+<color_param>     = "color" <color_value> ;
+<alpha_param>     = "alpha" <float> ;
+<intensity_param> = "intensidad" <number> | "grosor" <number> ;
 
-color_value     = "#" hex_digit {6} ;
-number          = digit { digit } ;
-float           = number "." number ;
-string          = '"' { character } '"' ;
+<color_value>     = "#" <hex_digit> ;
+<hex_color> ::= "#" <hex_digit> <hex_digit> <hex_digit> <hex_digit> <hex_digit> <hex_digit>
+<hex_digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "a" | "b" | "c" |"d" | "e" | "f" | "A" | "B" | "C" | "D" | "E" | "F"
+<float>           = number "." number ;
+<string>          = '"' <character> '"' ;
+<character>       = "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"i"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"x"|"y"|"z"
+<number>          = 1|2|3|4|5|6|7|8|9|0
 ```

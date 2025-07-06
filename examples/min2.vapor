@@ -1,2 +1,2 @@
-figura  piramide pos(derecha,arriba) tam grande
+figura  piramide pos(100,50) tam grande 
 texto "HOLA MUNDO" pos(300,300) tam 80 color #FF00FF
