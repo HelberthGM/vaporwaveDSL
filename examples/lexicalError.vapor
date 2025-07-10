@@ -1,0 +1,5 @@
+fondo degradado #29ZZ33 -> #00A2FF  // Error léxico: 'Z' no es dígito hexadecimal
+figura sol pos(400,300) tam cien    // Error léxico: 'cien' no es número
+texto "VAPORWAVE" pos(300,100) colr #FFFFFF  // Error léxico: 'colr' no es palabra reservada
+efecto glitch intensidad 7.5        // Error léxico: 7.5 no es entero
+elemento @busto pos(200,400)        // Error léxico: '@' no es caracter válido
